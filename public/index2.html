@@ -143,12 +143,38 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.4s ease;
-            cursor: pointer;
         }
         
         .photo-card:hover {
             transform: translateY(-10px) scale(1.02);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .download-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #d84315;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+        
+        .download-btn:hover {
+            transform: scale(1.1);
+            background: #ff6f00;
+            color: white;
         }
         
         .photo-card::before {
@@ -221,51 +247,25 @@
             font-style: italic;
         }
         
-        /* Lightbox */
-        .lightbox {
-            display: none;
+        /* Download notification */
+        .download-notification {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-        
-        .lightbox.active {
-            display: flex;
-        }
-        
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 10px;
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.3);
-        }
-        
-        .close-lightbox {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4caf50;
             color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            background: rgba(0, 0, 0, 0.5);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s ease;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            z-index: 3000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-weight: 600;
         }
         
-        .close-lightbox:hover {
-            background: rgba(0, 0, 0, 0.8);
+        .download-notification.show {
+            opacity: 1;
         }
         
         /* Loading animation */
@@ -350,103 +350,114 @@
         </header>
         
         <div class="gallery">
-            <div class="photo-card" onclick="openLightbox(this)">
+            <div class="photo-card" onclick="downloadImage('img1.jpeg', 'Radha-Krishna-Divine-Union')">
                 <div class="photo">
                     <img src="img1.jpeg" alt="Radha Krishna Divine Union" loading="lazy">
                 </div>
                 <div class="photo-info">
                     <div class="photo-title">Divine Union</div>
                 </div>
+                <button class="download-btn" onclick="event.stopPropagation(); downloadImage('img1.jpeg', 'Radha-Krishna-Divine-Union')">⬇</button>
             </div>
             
-            <div class="photo-card" onclick="openLightbox(this)">
+            <div class="photo-card" onclick="downloadImage('img2.jpeg', 'Lord-Krishna-with-Flute')">
                 <div class="photo">
                     <img src="img2.jpeg" alt="Lord Krishna with Flute" loading="lazy">
                 </div>
                 <div class="photo-info">
                     <div class="photo-title">Murlidhar Krishna</div>
                 </div>
+                <button class="download-btn" onclick="event.stopPropagation(); downloadImage('img2.jpeg', 'Lord-Krishna-with-Flute')">⬇</button>
             </div>
             
-            <div class="photo-card" onclick="openLightbox(this)">
+            <div class="photo-card" onclick="downloadImage('img3.jpeg', 'Radha-Ji-Divine-Beauty')">
                 <div class="photo">
                     <img src="img3.jpeg" alt="Radha Ji Divine Beauty" loading="lazy">
                 </div>
                 <div class="photo-info">
                     <div class="photo-title">Radharani's Grace</div>
                 </div>
+                <button class="download-btn" onclick="event.stopPropagation(); downloadImage('img3.jpeg', 'Radha-Ji-Divine-Beauty')">⬇</button>
             </div>
             
-            <div class="photo-card" onclick="openLightbox(this)">
+            <div class="photo-card" onclick="downloadImage('img4.jpeg', 'Krishna-Playing-Flute')">
                 <div class="photo">
                     <img src="img4.jpeg" alt="Krishna Playing Flute" loading="lazy">
                 </div>
                 <div class="photo-info">
                     <div class="photo-title">Enchanting Melody</div>
                 </div>
+                <button class="download-btn" onclick="event.stopPropagation(); downloadImage('img4.jpeg', 'Krishna-Playing-Flute')">⬇</button>
             </div>
             
-            <div class="photo-card" onclick="openLightbox(this)">
+            <div class="photo-card" onclick="downloadImage('img5.jpeg', 'Radha-Krishna-Eternal-Love')">
                 <div class="photo">
                     <img src="img5.jpeg" alt="Radha Krishna Eternal Love" loading="lazy">
                 </div>
                 <div class="photo-info">
                     <div class="photo-title">Eternal Love</div>
                 </div>
+                <button class="download-btn" onclick="event.stopPropagation(); downloadImage('img5.jpeg', 'Radha-Krishna-Eternal-Love')">⬇</button>
             </div>
             
-            <div class="photo-card" onclick="openLightbox(this)">
+            <div class="photo-card" onclick="downloadImage('img6.jpeg', 'Divine-Couple')">
                 <div class="photo">
                     <img src="img6.jpeg" alt="Divine Couple" loading="lazy">
                 </div>
                 <div class="photo-info">
                     <div class="photo-title">Divine Couple</div>
                 </div>
+                <button class="download-btn" onclick="event.stopPropagation(); downloadImage('img6.jpeg', 'Divine-Couple')">⬇</button>
             </div>
             
-            <div class="photo-card" onclick="openLightbox(this)">
+            <div class="photo-card" onclick="downloadImage('img11.jpeg', 'Vrindavan-Love')">
                 <div class="photo">
                     <img src="img11.jpeg" alt="Vrindavan Love" loading="lazy">
                 </div>
                 <div class="photo-info">
                     <div class="photo-title">Vrindavan Love</div>
                 </div>
+                <button class="download-btn" onclick="event.stopPropagation(); downloadImage('img11.jpeg', 'Vrindavan-Love')">⬇</button>
             </div>
             
-            <div class="photo-card" onclick="openLightbox(this)">
+            <div class="photo-card" onclick="downloadImage('img8.jpeg', 'Celestial-Dance')">
                 <div class="photo">
                     <img src="img8.jpeg" alt="Celestial Dance" loading="lazy">
                 </div>
                 <div class="photo-info">
                     <div class="photo-title">Celestial Dance</div>
                 </div>
+                <button class="download-btn" onclick="event.stopPropagation(); downloadImage('img8.jpeg', 'Celestial-Dance')">⬇</button>
             </div>
             
-            <div class="photo-card" onclick="openLightbox(this)">
+            <div class="photo-card" onclick="downloadImage('img10.jpeg', 'Divine-Blessing')">
                 <div class="photo">
                     <img src="img10.jpeg" alt="Divine Blessing" loading="lazy">
                 </div>
                 <div class="photo-info">
                     <div class="photo-title">Divine Blessing</div>
                 </div>
+                <button class="download-btn" onclick="event.stopPropagation(); downloadImage('img10.jpeg', 'Divine-Blessing')">⬇</button>
             </div>
             
-            <div class="photo-card" onclick="openLightbox(this)">
+            <div class="photo-card" onclick="downloadImage('img7.jpeg', 'Sacred-Union')">
                 <div class="photo">
                     <img src="img7.jpeg" alt="Sacred Union" loading="lazy">
                 </div>
                 <div class="photo-info">
                     <div class="photo-title">Sacred Union</div>
                 </div>
+                <button class="download-btn" onclick="event.stopPropagation(); downloadImage('img7.jpeg', 'Sacred-Union')">⬇</button>
             </div>
             
-            <div class="photo-card" onclick="openLightbox(this)">
+            <div class="photo-card" onclick="downloadImage('img12.jpeg', 'Eternal-Devotion')">
                 <div class="photo">
                     <img src="img12.jpeg" alt="Eternal Devotion" loading="lazy">
                 </div>
                 <div class="photo-info">
                     <div class="photo-title">Eternal Devotion</div>
                 </div>
+                <button class="download-btn" onclick="event.stopPropagation(); downloadImage('img12.jpeg', 'Eternal-Devotion')">⬇</button>
             </div>
         </div>
         
@@ -456,9 +467,8 @@
         </div>
     </div>
     
-    <div class="lightbox" onclick="closeLightbox()">
-        <span class="close-lightbox">&times;</span>
-        <img src="" alt="Enlarged view">
+    <div class="download-notification">
+        Image downloaded successfully! 🙏
     </div>
     
     <audio id="bg-music" loop>
@@ -492,30 +502,30 @@
             isPlaying = !isPlaying;
         }
         
-        // Lightbox functionality
-        function openLightbox(card) {
-            const lightbox = document.querySelector('.lightbox');
-            const lightboxImg = lightbox.querySelector('img');
-            const cardImg = card.querySelector('img');
+        // Download functionality
+        function downloadImage(imageSrc, fileName) {
+            // Show notification
+            showNotification();
             
-            lightboxImg.src = cardImg.src;
-            lightboxImg.alt = cardImg.alt;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
+            // Create a link element
+            const link = document.createElement('a');
+            link.href = imageSrc;
+            link.download = fileName + '.jpeg';
+            
+            // Trigger download
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
         }
         
-        function closeLightbox() {
-            const lightbox = document.querySelector('.lightbox');
-            lightbox.classList.remove('active');
-            document.body.style.overflow = 'auto';
+        function showNotification() {
+            const notification = document.querySelector('.download-notification');
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000);
         }
-        
-        // Keyboard navigation for lightbox
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeLightbox();
-            }
-        });
         
         // Lazy loading fallback for older browsers
         if ('loading' in HTMLImageElement.prototype) {
